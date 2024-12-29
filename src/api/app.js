@@ -32,7 +32,7 @@ app.get("/", (req, res) => {
 });
 
 // router
-app.use(userRoute);
+app.use("/user", userRoute);
 
 app.use("*", (req, res, next) => {
   const endpoint = req.originalUrl;

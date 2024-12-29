@@ -1,6 +1,6 @@
 const responseError = require("../error/responseError");
 
-const joiValidation = (request, schema) => (req, res, next) => {
+const joiValidation = (request, schema) => {
   const result = schema.validate(request, {
     abortEarly: false,
     allowUnknown: false,

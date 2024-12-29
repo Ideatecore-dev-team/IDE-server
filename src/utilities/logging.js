@@ -25,7 +25,7 @@ const transportsFile = new DailyRotateFile({
   filename: "./logs/%DATE%-logger.log",
   datePattern: "YYYY-MM-DD",
   maxSize: "1kb",
-  maxFiles: "1h",
+  maxFiles: "1d",
 });
 
 const logger = winston.createLogger({
