@@ -1,39 +1,28 @@
 const responseError = require("./responseError");
 
-const errorMiddleware = async (err, req, res, next) => {
-  try {
-    if (!err) {
-      next();
-      return;
-    }
-    if (err instanceof responseError) {
-      // console.log("===>", err, "<===");
-      res
-        .status(err.status)
-        .json({
-          error: true,
-          message: err.message,
-          status: "error",
-          statusCode: err.status,
-          success: false,
-        })
-        .end();
-    } else {
-      console.log("===>", err, "<===");
-      res
-        .status(500)
-        .json({
-          error: true,
-          message: "internal server error",
-          status: "error",
-          statusCode: 500,
-          success: false,
-        })
-        .end();
-    }
-  } catch (error) {
-    next(error);
+const errorMiddleware = (err, req, res, next) => {
+  if (err instanceof responseError) {
+    // Custom application error handling
+    return res.status(err.status).json({
+      error: true,
+      message: err.message,
+      status: "error",
+      statusCode: err.status,
+      success: false,
+    });
   }
+
+  // Log unexpected errors for debugging
+  // console.error("Unexpected Error:", err);
+
+  // Internal server error handling
+  return res.status(500).json({
+    error: true,
+    message: "Internal Server Error",
+    status: "error",
+    statusCode: 500,
+    success: false,
+  });
 };
 
 module.exports = errorMiddleware;

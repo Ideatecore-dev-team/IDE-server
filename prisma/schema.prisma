@@ -32,7 +32,7 @@ model User {
 
 model Category {
   id        String    @id @default(cuid())
-  title     String    @db.VarChar(255)
+  category  String    @unique @db.VarChar(100)
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   Article   Article[]
