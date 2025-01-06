@@ -15,6 +15,7 @@ const rateLimit = require("../utilities/rateLimit");
 // router
 const userRoute = require("../api/user/route");
 const categoryRoute = require("../api/category/route");
+const articleRoute = require("../api/article/route");
 
 app.use(cookieParser());
 app.use(cors());
@@ -35,6 +36,7 @@ app.get("/", (req, res) => {
 // router
 app.use("/user", userRoute);
 app.use("/category", categoryRoute);
+app.use("/article", articleRoute);
 
 app.use("*", (req, res, next) => {
   const endpoint = req.originalUrl;

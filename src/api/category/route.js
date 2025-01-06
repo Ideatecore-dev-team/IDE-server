@@ -5,8 +5,8 @@ const authentication = require("../../middleware/authentication");
 const router = express.Router();
 
 router.post("/", authentication, controller.create);
-router.get("/", authentication, controller.getAllCategory);
-router.get("/:categoryId", authentication, controller.getCategoryById);
+router.get("/", controller.getAllCategory);
+router.get("/:categoryId", controller.getCategoryById);
 router.put("/:categoryId", authentication, controller.updateCategory);
 router.delete("/:categoryId", authentication, controller.deleteCategory);
 

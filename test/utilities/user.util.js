@@ -20,9 +20,9 @@ const createTestUser = async () => {
 
 const deleteTestUser = async () => {
   await prisma.user.deleteMany({
-    where: {
-      email: userData.email,
-    },
+    // where: {
+    //   email: userData.email,
+    // },
   });
 };
 

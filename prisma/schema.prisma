@@ -42,8 +42,8 @@ model Article {
   id          String   @id @default(cuid())
   content     String   @db.Text
   description String   @db.Text
-  image       String   @db.VarChar(255)
-  title       String   @db.VarChar(255)
+  image       String   @db.Text
+  title       String   @db.Text
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
   userId      String
