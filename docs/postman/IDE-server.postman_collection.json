@@ -289,6 +289,19 @@
 			"item": [
 				{
 					"name": "create",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"\r",
+									""
+								],
+								"type": "text/javascript",
+								"packages": {}
+							}
+						}
+					],
 					"request": {
 						"method": "POST",
 						"header": [],
@@ -297,7 +310,7 @@
 							"urlencoded": [
 								{
 									"key": "content",
-									"value": "content",
+									"value": "content hello",
 									"type": "text"
 								},
 								{
@@ -317,7 +330,7 @@
 								},
 								{
 									"key": "categoryId",
-									"value": "cm5inhc8y0000taf4xql6oquc",
+									"value": "cm5lde0xx0001tafs42hoscbf",
 									"type": "text"
 								}
 							]
@@ -342,7 +355,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/article/cm5ino4k90002tawke3cxljxp",
+							"raw": "http://localhost:3001/article/cm5k2bv2v000tta4g1w8aa0xk",
 							"protocol": "http",
 							"host": [
 								"localhost"
@@ -350,7 +363,7 @@
 							"port": "3001",
 							"path": [
 								"article",
-								"cm5ino4k90002tawke3cxljxp"
+								"cm5k2bv2v000tta4g1w8aa0xk"
 							]
 						}
 					},
@@ -433,6 +446,99 @@
 									"key": "size",
 									"value": "10"
 								}
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "team category",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "name",
+									"value": "hello",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "http://localhost:3001/teamcategory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"teamcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/teamcategory",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"teamcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/teamcategory/cm5raasy50001talgopzoznvp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"teamcategory",
+								"cm5raasy50001talgopzoznvp"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://localhost:3001/teamcategory/cm5raasy50001talgopzoznvp",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "3001",
+							"path": [
+								"teamcategory",
+								"cm5raasy50001talgopzoznvp"
 							]
 						}
 					},

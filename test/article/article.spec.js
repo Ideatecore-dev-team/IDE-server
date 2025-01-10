@@ -357,12 +357,12 @@ describe("GET /article", () => {
     expect(result.body.data).toBeInstanceOf(Array);
     expect(result.body.data[0].id).toBeDefined();
     expect(result.body.data[0].userId).toBeDefined();
-    expect(result.body.data[0].content).toBe(article.articleData.content + 0);
+    expect(result.body.data[0].content).toBe(article.articleData.content + 14);
     expect(result.body.data[0].description).toBe(
-      article.articleData.description + 0,
+      article.articleData.description + 14,
     );
-    expect(result.body.data[0].image).toBe(article.articleData.image + 0);
-    expect(result.body.data[0].title).toBe(article.articleData.title + 0);
+    expect(result.body.data[0].image).toBe(article.articleData.image + 14);
+    expect(result.body.data[0].title).toBe(article.articleData.title + 14);
     expect(result.body.data[0].User.name).toBeDefined();
     expect(result.body.data[0].Category.category).toBeDefined();
     expect(result.body.data[0].categoryId).toBeDefined();
@@ -393,12 +393,12 @@ describe("GET /article", () => {
     expect(result.body.data).toBeInstanceOf(Array);
     expect(result.body.data[0].id).toBeDefined();
     expect(result.body.data[0].userId).toBeDefined();
-    expect(result.body.data[0].content).toBe(article.articleData.content + 14);
+    expect(result.body.data[0].content).toBe(article.articleData.content + 1);
     expect(result.body.data[0].description).toBe(
-      article.articleData.description + 14,
+      article.articleData.description + 1,
     );
-    expect(result.body.data[0].image).toBe(article.articleData.image + 14);
-    expect(result.body.data[0].title).toBe(article.articleData.title + 14);
+    expect(result.body.data[0].image).toBe(article.articleData.image + 1);
+    expect(result.body.data[0].title).toBe(article.articleData.title + 1);
     expect(result.body.data[0].User.name).toBeDefined();
     expect(result.body.data[0].Category.category).toBeDefined();
     expect(result.body.data[0].categoryId).toBeDefined();

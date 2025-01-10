@@ -108,14 +108,21 @@ Response Body:
     {
         "data": [
             {
-                "author": "Article author",
-                "category": "Article category",
-                "content": "Article content",
-                "date": "Article date",
-                "description": "Article description",
-                "id": "uuid",
-                "image": "Article image",
-                "title": "Article title"
+                "id": "cm5lde97m0003tafsd6whmneh",
+                "content": "content hello",
+                "description": "description",
+                "image": "image",
+                "title": "title",
+                "userId": "cm5lddtvn0000tafsezqaixnm",
+                "categoryId": "cm5lde0xx0001tafs42hoscbf",
+                "createdAt": "2025-01-06T18:23:31.619Z",
+                "updatedAt": "2025-01-06T18:23:31.619Z",
+                "User": {
+                    "name": "test"
+                },
+                "Category": {
+                    "category": "sains"
+                }
             }
         ],
         "error": false,
@@ -161,14 +168,21 @@ Response Body:
     {
         "data": [
             {
-                "author": "Article author",
-                "category": "Article category",
-                "content": "Article content",
-                "date": "Article date",
-                "description": "Article description",
-                "id": "uuid",
-                "image": "Article image",
-                "title": "Article title"
+                "id": "cm5lde97m0003tafsd6whmneh",
+                "content": "content hello",
+                "description": "description",
+                "image": "image",
+                "title": "title",
+                "userId": "cm5lddtvn0000tafsezqaixnm",
+                "categoryId": "cm5lde0xx0001tafs42hoscbf",
+                "createdAt": "2025-01-06T18:23:31.619Z",
+                "updatedAt": "2025-01-06T18:23:31.619Z",
+                "User": {
+                    "name": "test"
+                },
+                "Category": {
+                    "category": "sains"
+                }
             }
         ],
         "error": false,
@@ -206,15 +220,22 @@ Response Body:
 
     {
         "data": {
-            "author": "Article author",
-            "category": "Article category",
-            "content": "Article content",
-            "date": "Article date",
-            "description": "Article description",
-            "id": "uuid",
-            "image": "Article image",
-            "title": "Article title"
-        },
+                "id": "cm5lde97m0003tafsd6whmneh",
+                "content": "content hello",
+                "description": "description",
+                "image": "image",
+                "title": "title",
+                "userId": "cm5lddtvn0000tafsezqaixnm",
+                "categoryId": "cm5lde0xx0001tafs42hoscbf",
+                "createdAt": "2025-01-06T18:23:31.619Z",
+                "updatedAt": "2025-01-06T18:23:31.619Z",
+                "User": {
+                    "name": "test"
+                },
+                "Category": {
+                    "category": "sains"
+                }
+            }
         "error": false,
         "message": "success get data",
         "status": "success",

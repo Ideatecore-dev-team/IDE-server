@@ -19,7 +19,7 @@ const create = async (request) => {
 
 const getAllCategory = async () => {
   const result = await repository.getAllCategory();
-  if (result >= 0) {
+  if (result.length === 0) {
     throw new responseError(404, "category not found");
   }
 

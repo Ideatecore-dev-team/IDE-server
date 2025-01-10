@@ -76,6 +76,9 @@ const getAllArticle = async (data) => {
     select: articleSelect,
     skip: (data.page - 1) * data.size || 0,
     take: data.size || 10,
+    orderBy: {
+      createdAt: "desc",
+    },
   });
 
   return result;
