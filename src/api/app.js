@@ -17,6 +17,7 @@ const userRoute = require("../api/user/route");
 const categoryRoute = require("../api/category/route");
 const articleRoute = require("../api/article/route");
 const teamCategoryRoute = require("../api/teamCategory/route");
+const teamRoute = require("../api/team/route");
 
 app.use(cookieParser());
 app.use(cors());
@@ -39,6 +40,7 @@ app.use("/user", userRoute);
 app.use("/category", categoryRoute);
 app.use("/article", articleRoute);
 app.use("/teamcategory", teamCategoryRoute);
+app.use("/team", teamRoute);
 
 app.use("*", (req, res, next) => {
   const endpoint = req.originalUrl;
