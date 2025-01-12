@@ -81,3 +81,31 @@ model Team {
   categoryTeamId String
   CategoryTeam   CategoryTeam @relation(fields: [categoryTeamId], references: [id])
 }
+
+model Partner {
+  id        String   @id @default(cuid())
+  name      String   @db.VarChar(100)
+  image     String   @db.Text
+  link      String   @db.Text
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CompanyInfo {
+  id          String   @id @default(cuid())
+  name        String?  @db.VarChar(100)
+  description String?  @db.Text
+  title       String?  @db.VarChar(100)
+  image       String?  @db.Text
+  Phone       String?  @db.VarChar(100)
+  Email       String?  @db.VarChar(100)
+  Address     String?  @db.VarChar(100)
+  Facebook    String?  @db.VarChar(100)
+  Instagram   String?  @db.VarChar(100)
+  Twitter     String?  @db.VarChar(100)
+  Linkedin    String?  @db.VarChar(100)
+  Youtube     String?  @db.VarChar(100)
+  Tiktok      String?  @db.VarChar(100)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}

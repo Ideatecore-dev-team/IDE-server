@@ -1,5 +1,5 @@
 const supertest = require("supertest");
-const app = require("../../src/api/app");
+const app = require("../src/api/app");
 
 describe("GET /", () => {
   it("should return a 200 OK response", async () => {

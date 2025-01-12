@@ -1,6 +1,6 @@
 const supertest = require("supertest");
-const app = require("../../src/api/app");
-const user = require("../utilities/user.util");
+const app = require("../src/api/app");
+const user = require("./utilities/user.util");
 
 describe("POST /user/register", () => {
   afterEach(async () => {

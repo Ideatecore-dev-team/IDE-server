@@ -1,7 +1,7 @@
 const supertest = require("supertest");
-const app = require("../../src/api/app");
-const user = require("../utilities/user.util");
-const category = require("../utilities/category.util");
+const app = require("../src/api/app");
+const user = require("./utilities/user.util");
+const category = require("./utilities/category.util");
 
 describe("POST /category", () => {
   beforeEach(async () => {
