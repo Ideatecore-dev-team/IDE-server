@@ -20,4 +20,41 @@ const createUser = async (data) => {
   return result;
 };
 
-module.exports = { findUserByEmail, createUser };
+const findUserById = async (id) => {
+  const result = await prisma.user.findUnique({
+    where: { id },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      role: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+
+  return result;
+};
+
+const updateUserPassword = async (id, password) => {
+  const result = await prisma.user.update({
+    where: { id },
+    data: { password },
+    select: {
+      id: true,
+      email: true,
+      name: true,
+      role: true,
+      createdAt: true,
+      updatedAt: true,
+    },
+  });
+  return result;
+};
+
+module.exports = {
+  findUserByEmail,
+  createUser,
+  findUserById,
+  updateUserPassword,
+};
