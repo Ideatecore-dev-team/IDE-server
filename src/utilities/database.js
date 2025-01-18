@@ -1,7 +1,13 @@
 const { PrismaClient } = require("@prisma/client");
 const logger = require("./logging");
+require("dotenv").config();
 
 const prismaClient = new PrismaClient({
+  datasources: {
+    db: {
+      url: process.env.DATABASE_URL,
+    },
+  },
   log: [
     {
       emit: "event",
