@@ -15,6 +15,7 @@ const login = async (req, res, next) => {
       .cookie("authorization", `Bearer ${response.token}`, {
         httpOnly: true,
         secure: true,
+        sameSite: "none",
       })
       .json({
         data: response,

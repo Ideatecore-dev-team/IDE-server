@@ -22,9 +22,28 @@ const teamRoute = require("../api/team/route");
 const partnerRoute = require("../api/partner/route");
 const companyInfoRoute = require("../api/companyInfo/route");
 const subscribeRoute = require("../api/subscribe/route");
+const contactUsRoute = require("../api/contactUs/route");
 
 app.use(cookieParser());
-app.use(cors());
+
+const allowedOrigins = [
+  "http://localhost:5173", // Frontend 1
+  // "http://localhost:5174", // Frontend 2 (Example)
+  // "https://your-frontend-app.com", // Production frontend (Example)
+];
+app.use(
+  cors({
+    origin: function (origin, callback) {
+      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
+        // Check for allowed origin
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
+    credentials: true, // Allow credentials (cookies, etc.)
+  }),
+);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -49,6 +68,7 @@ app.use("/team", teamRoute);
 app.use("/partner", partnerRoute);
 app.use("/companyinfo", companyInfoRoute);
 app.use("/subscribe", subscribeRoute);
+app.use("/contactus", contactUsRoute);
 
 app.use("*", (req, res, next) => {
   const endpoint = req.originalUrl;

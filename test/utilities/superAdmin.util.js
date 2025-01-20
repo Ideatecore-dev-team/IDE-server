@@ -48,7 +48,7 @@ const getToken = async () => {
 
 const runCode = async () => {
   await createSuperAdmin();
-  await createManyTestUser();
+  // await createManyTestUser();
   const token = await getToken();
   console.log(token);
   return token;

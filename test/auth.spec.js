@@ -18,6 +18,13 @@ describe("POST /login", () => {
     });
 
     expect(result.status).toBe(200);
+    expect(result.body.data.id).toBeDefined();
+    expect(result.body.data.email).toContain("emailtest@example.com");
+    expect(result.body.data.name).toContain("nametest");
+    expect(result.body.data.password).toBeUndefined();
+    expect(result.body.data.role).toBe("ADMIN");
+    expect(result.body.data).toHaveProperty("createdAt");
+    expect(result.body.data).toHaveProperty("updatedAt");
     expect(result.body.data).toHaveProperty("token");
 
     expect(result.body.error).toBe(false);

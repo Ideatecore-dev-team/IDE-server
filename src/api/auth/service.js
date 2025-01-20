@@ -9,25 +9,27 @@ const createToken = require("../../utilities/createToken");
 const login = async (request) => {
   const validData = validation(request, schema.login);
 
-  const user = await repository.findUserByEmail(validData.email);
-  if (!user) {
+  const checkUser = await repository.findUserByEmail(validData.email);
+  if (!checkUser) {
     throw new responseError(401, "email or password is wrong");
   }
 
   const isPasswordValid = await bcrypt.compare(
     validData.password,
-    user.password,
+    checkUser.password,
   );
 
   if (!isPasswordValid) {
     throw new responseError(401, "email or password is wrong");
   }
 
+  const user = await repository.getUser(checkUser.id);
+
   const token = createToken({
     id: user.id,
   });
 
-  return { token };
+  return { ...user, token: token };
 };
 
 // changepassword
