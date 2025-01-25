@@ -53,7 +53,7 @@ const authentication = async (req, res, next) => {
     res.status(401).json({
       error: true,
       message: errorMessage,
-      status: "error",
+      status: "errorToken",
       statusCode: 401,
       success: false,
     });

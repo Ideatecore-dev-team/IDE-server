@@ -52,6 +52,11 @@ const updateUserById = async (request) => {
     throw new responseError(404, "user not found");
   }
 
+  // active this in production
+  if (user.role === "SUPER_ADMIN") {
+    throw new responseError(400, "cannot update super admin");
+  }
+
   const result = await repository.updateUserById(validData.id, validData.name);
   return result;
 };
@@ -62,6 +67,11 @@ const updatePasswordById = async (request) => {
   const user = await repository.getUserById(validData.id);
   if (!user) {
     throw new responseError(404, "user not found");
+  }
+
+  // active this in production
+  if (user.role === "SUPER_ADMIN") {
+    throw new responseError(400, "cannot change password super admin");
   }
 
   validData.password = await bcrypt.hash(validData.password, 12);
@@ -80,6 +90,11 @@ const remove = async (request) => {
   const user = await repository.getUserById(validData.id);
   if (!user) {
     throw new responseError(404, "user not found");
+  }
+
+  // active this in production
+  if (user.role === "SUPER_ADMIN") {
+    throw new responseError(400, "cannot delete super admin");
   }
 
   const result = await repository.remove(validData.id);
