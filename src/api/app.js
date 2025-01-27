@@ -1,6 +1,7 @@
 const express = require("express");
 const cookieParser = require("cookie-parser");
 const cors = require("cors");
+const path = require("path");
 
 const app = express();
 require("dotenv").config();
@@ -23,6 +24,9 @@ const partnerRoute = require("../api/partner/route");
 const companyInfoRoute = require("../api/companyInfo/route");
 const subscribeRoute = require("../api/subscribe/route");
 const contactUsRoute = require("../api/contactUs/route");
+const mediaRoute = require("../api/media/route");
+
+app.use("/media", express.static(path.join(__dirname, "../../media")));
 
 app.use(cookieParser());
 
@@ -69,10 +73,11 @@ app.use("/partner", partnerRoute);
 app.use("/companyinfo", companyInfoRoute);
 app.use("/subscribe", subscribeRoute);
 app.use("/contactus", contactUsRoute);
+app.use("/media", mediaRoute);
 
 app.use("*", (req, res, next) => {
   const endpoint = req.originalUrl;
-  next(new responseError(404, `${endpoint} endpoint not found!`));
+  next(new responseError(404, `${endpoint} url not found!`));
 });
 
 app.use(errorMiddleware);
