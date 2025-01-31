@@ -7,13 +7,13 @@ const authentication = async (req, res, next) => {
     // Check if the `authorization` cookie exists
     const authorizationCookie = req.cookies?.authorization;
     if (!authorizationCookie) {
-      throw new responseError(401, "unauthorized");
+      throw new responseError(401, "unauthenticated");
     }
 
     // Ensure the token has the correct Bearer format
     const bearer = authorizationCookie.split(" ")[0];
     if (bearer !== "Bearer") {
-      throw new responseError(401, "unauthorized");
+      throw new responseError(401, "unauthenticated");
     }
 
     // Verify the token
@@ -36,7 +36,7 @@ const authentication = async (req, res, next) => {
     });
 
     if (!user) {
-      throw new responseError(401, "unauthorized");
+      throw new responseError(401, "unauthenticated");
     }
 
     req.user = user;
@@ -48,12 +48,12 @@ const authentication = async (req, res, next) => {
         ? "Token has expired"
         : error.name === "JsonWebTokenError"
         ? "invalid token"
-        : "unauthorized";
+        : "unauthenticated";
 
     res.status(401).json({
       error: true,
       message: errorMessage,
-      status: "error",
+      status: "errorToken",
       statusCode: 401,
       success: false,
     });

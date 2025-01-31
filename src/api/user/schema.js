@@ -6,19 +6,18 @@ const register = Joi.object({
   name: Joi.string().max(100).required(),
 });
 
-const login = Joi.object({
-  email: Joi.string().email().max(100).required(),
+const getById = Joi.object({
+  id: Joi.string().required(),
+});
+
+const update = Joi.object({
+  id: Joi.string().required(),
+  name: Joi.string().max(100).required(),
+});
+
+const updatePassword = Joi.object({
+  id: Joi.string().required(),
   password: Joi.string().max(100).required(),
 });
 
-const getUser = Joi.object({
-  id: Joi.string().required(),
-});
-
-const changePassword = Joi.object({
-  id: Joi.string().required(),
-  oldPassword: Joi.string().max(100).required(),
-  newPassword: Joi.string().max(100).required(),
-});
-
-module.exports = { register, login, getUser, changePassword };
+module.exports = { register, update, getById, updatePassword };

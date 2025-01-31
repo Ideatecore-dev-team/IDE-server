@@ -1,5 +1,6 @@
 const service = require("./service");
 
+// register
 const register = async (req, res, next) => {
   try {
     const request = {
@@ -23,46 +24,83 @@ const register = async (req, res, next) => {
   }
 };
 
-const login = async (req, res, next) => {
+// get all user
+const getAllUser = async (req, res, next) => {
+  try {
+    const response = await service.getAllUser();
+
+    res.status(200).json({
+      data: response,
+      error: false,
+      message: "success get all user",
+      status: "success",
+      statusCode: 200,
+      success: true,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// get user by id
+const getUserById = async (req, res, next) => {
   try {
     const request = {
-      email: req.body.email,
+      id: req.params.userId,
+    };
+
+    const response = await service.getUserById(request);
+
+    res.status(200).json({
+      data: response,
+      error: false,
+      message: "success get user by id",
+      status: "success",
+      statusCode: 200,
+      success: true,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// update user by id
+const updateUserById = async (req, res, next) => {
+  try {
+    const request = {
+      id: req.params.userId,
+      name: req.body.name,
+    };
+
+    const response = await service.updateUserById(request);
+
+    res.status(200).json({
+      data: response,
+      error: false,
+      message: "success update user by id",
+      status: "success",
+      statusCode: 200,
+      success: true,
+    });
+  } catch (error) {
+    next(error);
+  }
+};
+
+// update password by id
+const updatePasswordById = async (req, res, next) => {
+  try {
+    const request = {
+      id: req.params.userId,
       password: req.body.password,
     };
 
-    const response = await service.login(request);
-
-    res
-      .status(200)
-      .cookie("authorization", `Bearer ${response.token}`, {
-        httpOnly: true,
-        secure: true,
-      })
-      .json({
-        data: response,
-        error: false,
-        message: "success login user",
-        status: "success",
-        statusCode: 200,
-        success: true,
-      });
-  } catch (error) {
-    next(error);
-  }
-};
-
-const getUser = async (req, res, next) => {
-  try {
-    const request = {
-      id: req.user.id,
-    };
-
-    const response = await service.getUser(request);
+    const response = await service.updatePasswordById(request);
 
     res.status(200).json({
       data: response,
       error: false,
-      message: "success get user",
+      message: "success update password by id",
       status: "success",
       statusCode: 200,
       success: true,
@@ -72,20 +110,19 @@ const getUser = async (req, res, next) => {
   }
 };
 
-const changePassword = async (req, res, next) => {
+// remove user by id
+const remove = async (req, res, next) => {
   try {
     const request = {
-      id: req.user.id,
-      oldPassword: req.body.oldPassword,
-      newPassword: req.body.newPassword,
+      id: req.params.userId,
     };
 
-    const response = await service.changePassword(request);
+    const response = await service.remove(request);
 
     res.status(200).json({
       data: response,
       error: false,
-      message: "success change password",
+      message: "success remove user by id",
       status: "success",
       statusCode: 200,
       success: true,
@@ -95,19 +132,11 @@ const changePassword = async (req, res, next) => {
   }
 };
 
-const logout = async (req, res, next) => {
-  try {
-    res.status(200).clearCookie("authorization").json({
-      data: null,
-      error: false,
-      message: "success logout user",
-      status: "success",
-      statusCode: 200,
-      success: true,
-    });
-  } catch (error) {
-    next(error);
-  }
+module.exports = {
+  register,
+  getAllUser,
+  getUserById,
+  updateUserById,
+  updatePasswordById,
+  remove,
 };
-
-module.exports = { register, login, getUser, changePassword, logout };

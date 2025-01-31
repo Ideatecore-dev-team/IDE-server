@@ -1,7 +1,7 @@
 const Joi = require("joi");
 
 const create = Joi.object({
-  category: Joi.string().max(100).required(),
+  category: Joi.string().max(100).required().lowercase(),
 });
 
 const get = Joi.object({
@@ -10,7 +10,7 @@ const get = Joi.object({
 
 const update = Joi.object({
   id: Joi.string().required(),
-  category: Joi.string().max(100).required(),
+  category: Joi.string().max(100).required().lowercase(),
 });
 
 module.exports = { create, update, get };

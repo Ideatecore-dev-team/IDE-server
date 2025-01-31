@@ -18,7 +18,11 @@ const getById = async (id) => {
 };
 
 const getAll = async () => {
-  const result = await prisma.categoryTeam.findMany();
+  const result = await prisma.categoryTeam.findMany({
+    orderBy: {
+      name: "asc",
+    },
+  });
   return result;
 };
 

@@ -19,7 +19,11 @@ const findCategoryByName = async (category) => {
 };
 
 const getAllCategory = async () => {
-  const result = await prisma.category.findMany();
+  const result = await prisma.category.findMany({
+    orderBy: {
+      category: "asc",
+    },
+  });
   return result;
 };
 

@@ -3,8 +3,8 @@ const schema = require("./schema");
 const repository = require("./repository");
 const validation = require("../../utilities/joiValidation");
 const responseError = require("../../error/responseError");
-const createToken = require("../../utilities/createToken");
 
+// register
 const register = async (request) => {
   const validData = validation(request, schema.register);
 
@@ -13,43 +13,29 @@ const register = async (request) => {
     throw new responseError(400, "email already exist");
   }
 
-  validData.password = await bcrypt.hash(validData.password, 10);
+  validData.password = await bcrypt.hash(validData.password, 12);
 
   const result = await repository.createUser(validData);
 
   return result;
 };
 
-const login = async (request) => {
-  const validData = validation(request, schema.login);
+// get all user
+const getAllUser = async () => {
+  const result = await repository.getAllUser();
 
-  const user = await repository.findUserByEmail(validData.email);
-  if (!user) {
-    throw new responseError(401, "email or password is wrong");
+  if (result.length === 0) {
+    throw new responseError(404, "user not found");
   }
 
-  const isPasswordValid = await bcrypt.compare(
-    validData.password,
-    user.password,
-  );
-
-  if (!isPasswordValid) {
-    throw new responseError(401, "email or password is wrong");
-  }
-
-  const token = createToken({
-    id: user.id,
-    // email: user.email,
-    // role: user.role,
-  });
-
-  return { token };
+  return result;
 };
 
-const getUser = async (request) => {
-  const validData = validation(request, schema.getUser);
+// get user by id
+const getUserById = async (request) => {
+  const validData = validation(request, schema.getById);
 
-  const user = await repository.findUserById(validData.id);
+  const user = await repository.getUserById(validData.id);
   if (!user) {
     throw new responseError(404, "user not found");
   }
@@ -57,41 +43,69 @@ const getUser = async (request) => {
   return user;
 };
 
-const changePassword = async (request) => {
-  const validData = validation(request, schema.changePassword);
+// update user by id
+const updateUserById = async (request) => {
+  const validData = validation(request, schema.update);
 
-  const user = await repository.findUserById(validData.id);
+  const user = await repository.getUserById(validData.id);
   if (!user) {
     throw new responseError(404, "user not found");
   }
 
-  const userEmail = await repository.findUserByEmail(user.email);
-  if (!userEmail) {
+  // active this in production
+  if (user.role === "SUPER_ADMIN") {
+    throw new responseError(400, "cannot update super admin");
+  }
+
+  const result = await repository.updateUserById(validData.id, validData.name);
+  return result;
+};
+
+const updatePasswordById = async (request) => {
+  const validData = validation(request, schema.updatePassword);
+
+  const user = await repository.getUserById(validData.id);
+  if (!user) {
     throw new responseError(404, "user not found");
   }
 
-  const isPasswordValid = await bcrypt.compare(
-    validData.oldPassword,
-    userEmail.password,
-  );
-
-  if (!isPasswordValid) {
-    throw new responseError(401, "old password is wrong");
+  // active this in production
+  if (user.role === "SUPER_ADMIN") {
+    throw new responseError(400, "cannot change password super admin");
   }
 
-  const hashedPassword = await bcrypt.hash(validData.newPassword, 10);
+  validData.password = await bcrypt.hash(validData.password, 12);
 
-  const result = await repository.updateUserPassword(
+  const result = await repository.updatePasswordById(
     validData.id,
-    hashedPassword,
+    validData.password,
   );
+  return result;
+};
 
+// remove user by id
+const remove = async (request) => {
+  const validData = validation(request, schema.getById);
+
+  const user = await repository.getUserById(validData.id);
+  if (!user) {
+    throw new responseError(404, "user not found");
+  }
+
+  // active this in production
+  if (user.role === "SUPER_ADMIN") {
+    throw new responseError(400, "cannot delete super admin");
+  }
+
+  const result = await repository.remove(validData.id);
   return result;
 };
 
 module.exports = {
   register,
-  login,
-  getUser,
-  changePassword,
+  getAllUser,
+  getUserById,
+  updateUserById,
+  updatePasswordById,
+  remove,
 };
