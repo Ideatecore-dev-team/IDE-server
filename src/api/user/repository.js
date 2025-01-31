@@ -26,7 +26,10 @@ const createUser = async (data) => {
 
 // get all user
 const getAllUser = async () =>
-  await prisma.user.findMany({ select: selectData });
+  await prisma.user.findMany({
+    select: selectData,
+    where: { role: "ADMIN" },
+  });
 
 // get user by id
 const getUserById = async (id) => {

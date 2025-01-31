@@ -10,7 +10,7 @@ const get = Joi.object({
 
 const update = Joi.object({
   id: Joi.string().required(),
-  name: Joi.string().max(100).required(),
+  name: Joi.string().max(100).required().lowercase(),
 });
 
 module.exports = { create, update, get };

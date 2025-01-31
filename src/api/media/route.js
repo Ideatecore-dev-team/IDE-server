@@ -3,6 +3,7 @@ const fs = require("fs");
 const multer = require("multer");
 const cuid = require("cuid");
 const path = require("path");
+const authentication = require("../../middleware/authentication");
 
 const responseError = require("../../error/responseError");
 
@@ -30,7 +31,7 @@ const buildFileUrl = (req, file) =>
   `${req.protocol}://${req.get("host")}/media/${file}`;
 
 // Upload image
-router.post("/", upload.single("image"), (req, res) => {
+router.post("/", authentication, upload.single("image"), (req, res) => {
   if (!req.file) {
     return res.status(400).json({
       error: true,
@@ -55,7 +56,7 @@ router.post("/", upload.single("image"), (req, res) => {
 // List images with pagination
 router.get("/", (req, res) => {
   const page = Math.max(parseInt(req.query.page) || 1, 1);
-  const size = Math.max(parseInt(req.query.size) || 10, 1);
+  const size = Math.max(parseInt(req.query.size) || 9, 1);
   const start = (page - 1) * size;
   const end = start + size;
 
@@ -71,7 +72,7 @@ router.get("/", (req, res) => {
       });
     }
 
-    const fileUrls = files.map((file) => buildFileUrl(req, file));
+    const fileUrls = files.reverse().map((file) => buildFileUrl(req, file));
     res.status(200).json({
       currentPage: page,
       totalItems: files.length,
@@ -88,7 +89,7 @@ router.get("/", (req, res) => {
 });
 
 // Delete image
-router.delete("/", (req, res) => {
+router.delete("/", authentication, (req, res) => {
   const { imageUrl } = req.body;
   if (!imageUrl) {
     return res.status(400).json({
