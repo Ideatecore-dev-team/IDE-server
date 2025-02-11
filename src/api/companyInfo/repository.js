@@ -13,9 +13,9 @@ const get = async () => {
 };
 
 // update
-const update = async (id, data) => {
+const update = async (data) => {
   const result = await prisma.companyInfo.update({
-    where: { id },
+    where: { id: data.id },
     data,
   });
   return result;

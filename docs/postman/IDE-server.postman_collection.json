@@ -583,12 +583,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/article?page=1&search=hello&size=10",
-							"protocol": "http",
+							"raw": "https://server-ideindonesia.ideatecore.com/article?page=1&search=hello&size=10",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"server-ideindonesia",
+								"ideatecore",
+								"com"
 							],
-							"port": "3001",
 							"path": [
 								"article"
 							],
@@ -625,7 +626,7 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "hello",
+									"value": "content creator",
 									"type": "text"
 								}
 							]
@@ -749,7 +750,8 @@
 								{
 									"key": "name",
 									"value": "qqqq",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "position",
@@ -766,13 +768,13 @@
 								{
 									"key": "link",
 									"value": "",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "categoryTeamId",
 									"value": "cm5s9ub930001tac8po78mvyg",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
@@ -796,12 +798,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/team",
-							"protocol": "http",
+							"raw": "https://server-ideindonesia.ideatecore.com/team",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"server-ideindonesia",
+								"ideatecore",
+								"com"
 							],
-							"port": "3001",
 							"path": [
 								"team"
 							]

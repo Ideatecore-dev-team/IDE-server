@@ -25,28 +25,39 @@ const companyInfoRoute = require("../api/companyInfo/route");
 const subscribeRoute = require("../api/subscribe/route");
 const contactUsRoute = require("../api/contactUs/route");
 const mediaRoute = require("../api/media/route");
+const galleryRoute = require("../api/gallery/route");
+const programCategory = require("../api/programCategory/route");
+const programRoute = require("../api/program/route");
 
 app.use(cookieParser());
 
 const allowedOrigins = [
-  "http://localhost:5173", // Frontend 1
-  // "http://localhost:5174", // Frontend 2 (Example)
-  // "https://your-frontend-app.com", // Production frontend (Example)
+  "http://localhost:5173",
+  "http://localhost:5174",
+  "https://ideindonesia.ideatecore.com",
+  "https://cms-ideindonesia.ideatecore.com",
+  "https://devideindonesia.netlify.app",
 ];
 
 // General CORS middleware
 app.use(
   cors({
-    origin: function (origin, callback) {
-      if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-        callback(null, true); // Allow the request
+    origin: (origin, callback) => {
+      if (allowedOrigins.includes(origin) || !origin) {
+        callback(null, true);
       } else {
-        callback(new Error("Not allowed by CORS")); // Block the request
+        callback(new Error("Not allowed by CORS"));
       }
     },
-    credentials: true, // Allow cookies and credentials
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+    credentials: true,
+    optionsSuccessStatus: 200,
+    maxAge: 86400,
   }),
 );
+
+app.options("*", cors());
 
 // Middleware for parsing JSON and URL encoded data
 app.use(express.json());
@@ -63,9 +74,9 @@ app.use(
 );
 
 // delay
-app.use(apiDelay);
+// app.use(apiDelay);
 // limit request from one IP address per second
-app.use(rateLimit);
+// app.use(rateLimit);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -85,6 +96,9 @@ app.use("/companyinfo", companyInfoRoute);
 app.use("/subscribe", subscribeRoute);
 app.use("/contactus", contactUsRoute);
 app.use("/media", mediaRoute);
+app.use("/gallery", galleryRoute);
+app.use("/programcategory", programCategory);
+app.use("/program", programRoute);
 
 app.use("*", (req, res, next) => {
   const endpoint = req.originalUrl;
