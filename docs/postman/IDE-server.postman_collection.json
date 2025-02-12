@@ -22,12 +22,12 @@
 							"urlencoded": [
 								{
 									"key": "email",
-									"value": "test@test.com",
+									"value": "sebuahemail@email.com",
 									"type": "text"
 								},
 								{
 									"key": "password",
-									"value": "test",
+									"value": "sebuahpassword",
 									"type": "text"
 								}
 							]
@@ -122,6 +122,41 @@
 							"port": "3001",
 							"path": [
 								"getuser"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "{{IDE-Indonesia}}/login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "email",
+									"value": "sebuahemail@email.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "sebuahpassword",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{IDE-Indonesia}}/login",
+							"host": [
+								"{{IDE-Indonesia}}"
+							],
+							"path": [
+								"login"
 							]
 						}
 					},
@@ -583,12 +618,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/article?page=1&search=hello&size=10",
-							"protocol": "http",
+							"raw": "https://server-ideindonesia.ideatecore.com/article?page=1&search=hello&size=10",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"server-ideindonesia",
+								"ideatecore",
+								"com"
 							],
-							"port": "3001",
 							"path": [
 								"article"
 							],
@@ -625,7 +661,7 @@
 							"urlencoded": [
 								{
 									"key": "name",
-									"value": "hello",
+									"value": "content creator",
 									"type": "text"
 								}
 							]
@@ -749,7 +785,8 @@
 								{
 									"key": "name",
 									"value": "qqqq",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								},
 								{
 									"key": "position",
@@ -766,13 +803,13 @@
 								{
 									"key": "link",
 									"value": "",
-									"type": "text",
-									"disabled": true
+									"type": "text"
 								},
 								{
 									"key": "categoryTeamId",
 									"value": "cm5s9ub930001tac8po78mvyg",
-									"type": "text"
+									"type": "text",
+									"disabled": true
 								}
 							]
 						},
@@ -796,12 +833,13 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://localhost:3001/team",
-							"protocol": "http",
+							"raw": "https://server-ideindonesia.ideatecore.com/team",
+							"protocol": "https",
 							"host": [
-								"localhost"
+								"server-ideindonesia",
+								"ideatecore",
+								"com"
 							],
-							"port": "3001",
 							"path": [
 								"team"
 							]
@@ -1057,7 +1095,7 @@
 						"header": [],
 						"body": {
 							"mode": "raw",
-							"raw": "{\r\n  \"id\": \"cm5szajxx0000taiwtx84mxn7\",\r\n  \"name\": \"Company Name\",\r\n  \"description\": \"Company Description\",\r\n  \"title\": \"Company Title\",\r\n  \"image\": \"Company Image\",\r\n  \"Phone\": \"Company Phone\",\r\n  \"Email\": \"Company Email\",\r\n  \"Address\": \"Company Address\",\r\n  \"Facebook\": \"Company Facebook\",\r\n  \"Instagram\": \"Company Instagram\",\r\n  \"Twitter\": \"Company Twitter\",\r\n  \"Linkedin\": \"Company Linkedin\",\r\n  \"Youtube\": \"Company Youtube\",\r\n  \"Tiktok\": \"Company Tiktok\"\r\n}",
+							"raw": "{\r\n  \"id\": \"cm6v8mwkd0000tazk035tufuk\",\r\n  \"name\": \"Company Name\",\r\n  \"description\": \"Company Description\",\r\n  \"title\": \"Company Title\",\r\n  \"image\": \"https://www.facebook.com/\",\r\n  \"Phone\": \"Company Phone\",\r\n  \"Email\": \"email@mail.com\",\r\n  \"Address\": \"https://www.facebook.com/\",\r\n  \"Facebook\": \"https://www.facebook.com/\",\r\n  \"Instagram\": \"https://www.facebook.com/\",\r\n  \"Twitter\": \"https://www.facebook.com/\",\r\n  \"Linkedin\": \"https://www.facebook.com/\",\r\n  \"Youtube\": \"https://www.facebook.com/\",\r\n  \"Tiktok\": \"https://www.facebook.com/\"\r\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1534,6 +1572,352 @@
 							"port": "3001",
 							"path": [
 								"media"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "gallery",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "image",
+									"value": "http://localhost:3001/media/cm6kef5ps0007b4tadj9g267y-meal-2.jpg",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/gallery",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"gallery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": [
+								{
+									"key": "image",
+									"value": "https://picsum.photos/170/250",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/gallery/cm6u63rfp0000ta7cog34mfxz",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"gallery",
+								"cm6u63rfp0000ta7cog34mfxz"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get all",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "urlencoded",
+							"urlencoded": []
+						},
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/gallery",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"gallery"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/gallery/cm6u63vtl0001ta7c1gp91sd6",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"gallery",
+								"cm6u63vtl0001ta7c1gp91sd6"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "programCategory",
+			"item": [
+				{
+					"name": "get all",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/programcategory",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"programcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"ekonomi\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/programcategory",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"programcategory"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\":\"budaya\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/programcategory/cm70pfb2z0000tafsebyhekt5",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"programcategory",
+								"cm70pfb2z0000tafsebyhekt5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/programcategory/cm70pfb2z0000tafsebyhekt5",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"programcategory",
+								"cm70pfb2z0000tafsebyhekt5"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/programcategory/cm70pfb2z0000tafsebyhekt5",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"programcategory",
+								"cm70pfb2z0000tafsebyhekt5"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "program",
+			"item": [
+				{
+					"name": "create",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"hello\",\r\n    \"description\": \"hello\",\r\n    \"image\": \"hello\",\r\n    \"title\": \"hello\",\r\n    \"userId\": \"hello\",\r\n    \"programCategoryId\": \"cm70plwv50000ta5s9kmlb1bv\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/program",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"program"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get by id",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/program/cm70w289q0001ta3g9jwqqvle",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"program",
+								"cm70w289q0001ta3g9jwqqvle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"content\": \"update hello\",\r\n    \"description\": \"hello\",\r\n    \"image\": \"hello\",\r\n    \"title\": \"hello\",\r\n    \"userId\": \"hello\",\r\n    \"programCategoryId\": \"cm70plwv50000ta5s9kmlb1bv\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/program/cm70w289q0001ta3g9jwqqvle",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"program",
+								"cm70w289q0001ta3g9jwqqvle"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{IDE-Indonesia-local}}/program/cm70w289q0001ta3g9jwqqvle",
+							"host": [
+								"{{IDE-Indonesia-local}}"
+							],
+							"path": [
+								"program",
+								"cm70w289q0001ta3g9jwqqvle"
 							]
 						}
 					},

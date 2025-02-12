@@ -2,7 +2,7 @@ const logger = require("../utilities/logging");
 const responseError = require("./responseError");
 
 const errorMiddleware = (err, req, res, next) => {
-  logger.error(`${err.status}\n${err.message}`);
+  logger.error(`${err.status}\n${err.message}\n${err.stack}`);
 
   if (err instanceof responseError) {
     // Custom application error handling

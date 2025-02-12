@@ -27,7 +27,10 @@ const create = async (data) => {
 
 // getAll
 const getAll = async () => {
-  const result = await prisma.partner.findMany({ select });
+  const result = await prisma.partner.findMany({
+    select,
+    orderBy: { createdAt: "desc" },
+  });
   return result;
 };
 

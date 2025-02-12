@@ -37,7 +37,7 @@ const update = async (request) => {
     throw new responseError(404, "company info not found");
   }
 
-  const result = await repository.update(validData.id, validData);
+  const result = await repository.update(validData);
   return result;
 };
 
