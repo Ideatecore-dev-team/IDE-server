@@ -147,3 +147,9 @@ model Program {
   programCategoryId String
   ProgramCategory   ProgramCategory @relation(fields: [programCategoryId], references: [id])
 }
+
+model Visit {
+  id        String   @id @default(cuid())
+  ip        String
+  createdAt DateTime @default(now())
+}
