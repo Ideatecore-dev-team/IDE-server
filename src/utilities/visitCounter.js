@@ -1,5 +1,5 @@
 // middlewares/visitCounter.js
-const prisma = require("./database");
+const prisma = require("./database"); // Adjust the path if necessary
 
 const visitCounterMiddleware = async (req, res, next) => {
   // Retrieve the IP address
@@ -17,6 +17,8 @@ const visitCounterMiddleware = async (req, res, next) => {
     console.error("Error logging visit:", error);
     next(error);
   }
+
+  next();
 };
 
 module.exports = visitCounterMiddleware;
