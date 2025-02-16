@@ -15,8 +15,8 @@ const visitCounterMiddleware = async (req, res, next) => {
     });
   } catch (error) {
     console.error("Error logging visit:", error);
+    next(error);
   }
-  next();
 };
 
 module.exports = visitCounterMiddleware;
