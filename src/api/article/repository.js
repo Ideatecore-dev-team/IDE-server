@@ -22,28 +22,20 @@ const articleSelect = {
   },
 };
 
-const getSearchArticleFilter = (search) => ({
-  OR: [
-    {
-      title: {
-        contains: search,
-        mode: "insensitive",
-      },
-    },
-    {
-      description: {
-        contains: search,
-        mode: "insensitive",
-      },
-    },
-    {
-      content: {
-        contains: search,
-        mode: "insensitive",
-      },
-    },
-  ],
-});
+const getSearchArticleFilter = (data) => {
+  const filter = {
+    OR: ["title", "description"].map((field) => ({
+      [field]: { contains: data.search, mode: "insensitive" },
+    })),
+  };
+
+  // Filter by category if provided
+  if (data.searchByCategory) {
+    filter.AND = [{ categoryId: data.searchByCategory }];
+  }
+
+  return filter;
+};
 
 const create = async (data) =>
   await prisma.article.create({
@@ -72,7 +64,7 @@ const deleteArticleById = async (id) =>
 
 const getAllArticle = async (data) => {
   const result = await prisma.article.findMany({
-    where: data.search ? getSearchArticleFilter(data.search) : undefined, // Apply filter if search exists
+    where: data ? getSearchArticleFilter(data) : undefined, // Apply filter if search exists
     select: articleSelect,
     skip: (data.page - 1) * data.size || 0,
     take: data.size || 10,
@@ -86,7 +78,7 @@ const getAllArticle = async (data) => {
 
 const totalItems = async (data) =>
   await prisma.article.count({
-    where: data.search ? getSearchArticleFilter(data.search) : undefined, // Apply filter if search exists
+    where: data ? getSearchArticleFilter(data) : undefined, // Apply filter if search exists
   });
 
 module.exports = {

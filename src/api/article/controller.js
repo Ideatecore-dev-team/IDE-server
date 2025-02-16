@@ -101,6 +101,7 @@ const getAllArticle = async (req, res, next) => {
       search: req.query.search,
       page: req.query.page,
       size: req.query.size,
+      searchByCategory: req.query.searchByCategory,
     };
 
     const response = await service.getAllArticle(request);

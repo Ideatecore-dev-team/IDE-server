@@ -26,7 +26,8 @@ const update = Joi.object({
 const getAll = Joi.object({
   search: Joi.string().optional().empty("").default(""),
   page: Joi.number().min(1).positive().default(1),
-  size: Joi.number().min(1).max(100).positive().default(5),
+  size: Joi.number().min(1).max(100).positive().default(10),
+  searchByCategory: Joi.string().optional().empty("").default(""),
 });
 
 module.exports = {
