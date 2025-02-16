@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const prisma = require("../../utilities/database");
+const authentication = require("../../middleware/authentication");
 
-router.get("/", async (req, res) => {
+router.get("/", authentication, async (req, res, next) => {
   try {
     const now = new Date();
 
