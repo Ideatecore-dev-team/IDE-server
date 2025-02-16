@@ -13,6 +13,7 @@ const errorMiddleware = require("../error/errorMiddleware");
 // utilities
 const apiDelay = require("../utilities/apiDelay");
 const rateLimit = require("../utilities/rateLimit");
+const visitCounterMiddleware = require("../utilities/visitCounter");
 // router
 const authRoute = require("../api/auth/route");
 const userRoute = require("../api/user/route");
@@ -28,6 +29,7 @@ const mediaRoute = require("../api/media/route");
 const galleryRoute = require("../api/gallery/route");
 const programCategory = require("../api/programCategory/route");
 const programRoute = require("../api/program/route");
+const metricRoute = require("../api/metric/route");
 
 app.use(cookieParser());
 
@@ -77,6 +79,7 @@ app.use(
 // app.use(apiDelay);
 // limit request from one IP address per second
 // app.use(rateLimit);
+app.use(visitCounterMiddleware);
 
 app.get("/", (req, res) => {
   res.send("Hello World!");
@@ -99,6 +102,7 @@ app.use("/media", mediaRoute);
 app.use("/gallery", galleryRoute);
 app.use("/programcategory", programCategory);
 app.use("/program", programRoute);
+app.use("/metric", metricRoute);
 
 app.use("*", (req, res, next) => {
   const endpoint = req.originalUrl;

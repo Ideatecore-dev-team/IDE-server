@@ -22,28 +22,20 @@ const programSelect = {
   },
 };
 
-const getSearchProgramFilter = (search) => ({
-  OR: [
-    {
-      title: {
-        contains: search,
-        mode: "insensitive",
-      },
-    },
-    {
-      description: {
-        contains: search,
-        mode: "insensitive",
-      },
-    },
-    // {
-    //   content: {
-    //     contains: search,
-    //     mode: "insensitive",
-    //   },
-    // },
-  ],
-});
+const getSearchProgramFilter = (data) => {
+  const filter = {
+    OR: ["title", "description"].map((field) => ({
+      [field]: { contains: data.search, mode: "insensitive" },
+    })),
+  };
+
+  // Filter by category if provided
+  if (data.searchByCategory) {
+    filter.AND = [{ programCategoryId: data.searchByCategory }];
+  }
+
+  return filter;
+};
 
 const create = async (data) =>
   await prisma.program.create({
@@ -72,7 +64,7 @@ const deleteProgrameById = async (id) =>
 
 const getAllProgram = async (data) => {
   const result = await prisma.program.findMany({
-    where: data.search ? getSearchProgramFilter(data.search) : undefined, // Apply filter if search exists
+    where: data ? getSearchProgramFilter(data) : undefined, // Apply filter if search exists
     select: programSelect,
     skip: (data.page - 1) * data.size || 0,
     take: data.size || 10,
@@ -86,7 +78,7 @@ const getAllProgram = async (data) => {
 
 const totalItems = async (data) =>
   await prisma.program.count({
-    where: data.search ? getSearchProgramFilter(data.search) : undefined, // Apply filter if search exists
+    where: data ? getSearchProgramFilter(data) : undefined, // Apply filter if search exists
   });
 
 module.exports = {
