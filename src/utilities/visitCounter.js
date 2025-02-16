@@ -8,7 +8,6 @@ const visitCounterMiddleware = async (req, res, next) => {
     req.headers["x-forwarded-for"] ||
     req.connection.remoteAddress ||
     "unknown";
-
   try {
     await prisma.visit.create({
       data: { ip },

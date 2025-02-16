@@ -79,4 +79,19 @@ router.get("/", authentication, async (req, res, next) => {
   }
 });
 
+// API to log visits from the frontend
+router.post("/visit", async (req, res, next) => {
+  try {
+    const ip = req.body.ip || "unknown";
+    console.log(req.body);
+    console.log(req.body.ip);
+
+    await prisma.visit.create({ data: { ip } });
+
+    res.status(201).json({ message: "Visit logged successfully" });
+  } catch (error) {
+    next(error);
+  }
+});
+
 module.exports = router;
