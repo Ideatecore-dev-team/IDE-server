@@ -6,8 +6,17 @@ const create = async (data) => {
 };
 
 // get all
-const getAll = async () => {
-  return await prisma.contactUs.findMany();
+const getAll = async (data) => {
+  return await prisma.contactUs.findMany({
+    skip: (data.page - 1) * data.size || 0,
+    take: data.size || 10,
+  });
+};
+
+const totalItems = async () => {
+  const result = await prisma.contactUs.count();
+
+  return result;
 };
 
 // get by id
@@ -25,4 +34,4 @@ const remove = async (id) => {
   return await prisma.contactUs.delete({ where: { id } });
 };
 
-module.exports = { create, getAll, getById, update, remove };
+module.exports = { create, getAll, getById, update, remove, totalItems };

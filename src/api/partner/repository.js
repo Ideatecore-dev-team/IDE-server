@@ -26,11 +26,19 @@ const create = async (data) => {
 };
 
 // getAll
-const getAll = async () => {
+const getAll = async (data) => {
   const result = await prisma.partner.findMany({
     select,
     orderBy: { createdAt: "desc" },
+    skip: (data.page - 1) * data.size || 0,
+    take: data.size || 10,
   });
+  return result;
+};
+
+const totalItems = async () => {
+  const result = await prisma.partner.count();
+
   return result;
 };
 
@@ -59,4 +67,12 @@ const remove = async (id) => {
   return result;
 };
 
-module.exports = { checkPartnerExist, create, getAll, getById, update, remove };
+module.exports = {
+  checkPartnerExist,
+  create,
+  getAll,
+  getById,
+  update,
+  remove,
+  totalItems,
+};
