@@ -15,9 +15,14 @@ const update = Joi.object({
   name: Joi.string().max(100).required(),
 });
 
+const getAll = Joi.object({
+  page: Joi.number().min(1).positive().default(1),
+  size: Joi.number().min(1).max(100).positive().default(10),
+});
+
 const updatePassword = Joi.object({
   id: Joi.string().required(),
   password: Joi.string().max(100).required(),
 });
 
-module.exports = { register, update, getById, updatePassword };
+module.exports = { register, update, getById, updatePassword, getAll };

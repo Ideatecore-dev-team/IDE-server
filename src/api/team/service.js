@@ -20,6 +20,7 @@ const create = async (request) => {
 // get all
 const getAll = async (request) => {
   const validData = validation(request, schema.getAll);
+
   const team = await repository.getAll(validData);
 
   if (team.length === 0) {
