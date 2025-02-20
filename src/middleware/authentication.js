@@ -4,20 +4,25 @@ const prisma = require("../utilities/database");
 
 const authentication = async (req, res, next) => {
   try {
-    // Check if the `authorization` cookie exists
+    // Prioritize token from Authorization header, fallback to authorization cookie
+    let token = null;
+    const authorizationHeader = req.headers?.authorization;
     const authorizationCookie = req.cookies?.authorization;
-    if (!authorizationCookie) {
-      throw new responseError(401, "unauthenticated");
+
+    if (authorizationHeader && authorizationHeader.startsWith("Bearer ")) {
+      token = authorizationHeader.split(" ")[1];
+    } else if (
+      authorizationCookie &&
+      authorizationCookie.startsWith("Bearer ")
+    ) {
+      token = authorizationCookie.split(" ")[1];
     }
 
-    // Ensure the token has the correct Bearer format
-    const bearer = authorizationCookie.split(" ")[0];
-    if (bearer !== "Bearer") {
+    if (!token) {
       throw new responseError(401, "unauthenticated");
     }
 
     // Verify the token
-    const token = req.cookies.authorization.split(" ")[1];
     const verifyToken = jwt.verify(token, process.env.JWT_SECRET);
 
     // Check if the user exists in the database
