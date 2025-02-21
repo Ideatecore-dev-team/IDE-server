@@ -8,8 +8,19 @@ const create = async (data) => {
 };
 
 // get all
-const getAll = async () => {
-  return await prisma.subscribe.findMany();
+const getAll = async (data) => {
+  const result = await prisma.subscribe.findMany({
+    skip: (data.page - 1) * data.size || 0,
+    take: data.size || 10,
+  });
+
+  return result;
+};
+
+const totalItems = async () => {
+  const result = await prisma.subscribe.count();
+
+  return result;
 };
 
 // get by id
@@ -34,4 +45,4 @@ const remove = async (id) => {
   });
 };
 
-module.exports = { create, getAll, getById, update, remove };
+module.exports = { create, getAll, getById, update, remove, totalItems };

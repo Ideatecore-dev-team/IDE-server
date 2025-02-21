@@ -32,8 +32,18 @@ const create = async (data) => {
 };
 
 // getAll
-const getAll = async () => {
-  const result = await prisma.team.findMany({ select });
+const getAll = async (data) => {
+  const result = await prisma.team.findMany({
+    select,
+    skip: (data.page - 1) * data.size || 0,
+    take: data.size || 10,
+  });
+  return result;
+};
+
+const totalItems = async () => {
+  const result = await prisma.team.count();
+
   return result;
 };
 
@@ -69,4 +79,5 @@ module.exports = {
   getById,
   update,
   remove,
+  totalItems,
 };

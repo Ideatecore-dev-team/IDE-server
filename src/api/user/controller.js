@@ -27,10 +27,21 @@ const register = async (req, res, next) => {
 // get all user
 const getAllUser = async (req, res, next) => {
   try {
-    const response = await service.getAllUser();
+    const request = {
+      page: req.query.page,
+      size: req.query.size,
+    };
+
+    const response = await service.getAllUser(request);
 
     res.status(200).json({
-      data: response,
+      data: response.user,
+      pagination: {
+        currentPage: response.currentPage,
+        perPage: response.perPage,
+        totalItems: response.totalItems,
+        totalPage: response.totalPage,
+      },
       error: false,
       message: "success get all user",
       status: "success",

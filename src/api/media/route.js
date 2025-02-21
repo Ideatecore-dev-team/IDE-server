@@ -28,7 +28,11 @@ const upload = multer({
 });
 
 const buildFileUrl = (req, file) =>
-  `${req.protocol}://${req.get("host")}/media/${file}`;
+  // in development
+  // `${req.protocol}://${req.get("host")}/media/${file}`;
+
+  // in production use https
+  `https://${req.get("host")}/media/${file}`;
 
 // Upload image
 router.post("/", authentication, upload.single("image"), (req, res) => {

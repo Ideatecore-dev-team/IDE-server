@@ -25,10 +25,21 @@ const create = async (req, res, next) => {
 // get all
 const getAll = async (req, res, next) => {
   try {
-    const response = await service.getAll();
+    const request = {
+      page: req.query.page,
+      size: req.query.size,
+    };
+
+    const response = await service.getAll(request);
 
     res.status(200).json({
-      data: response,
+      data: response.subscribe,
+      pagination: {
+        currentPage: response.currentPage,
+        perPage: response.perPage,
+        totalItems: response.totalItems,
+        totalPage: response.totalPage,
+      },
       error: false,
       message: "success get all subscribe",
       status: "success",

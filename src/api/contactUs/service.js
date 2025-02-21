@@ -11,13 +11,27 @@ const create = async (request) => {
 };
 
 // get all
-const getAll = async () => {
-  const result = await repository.getAll();
-  if (result.length === 0) {
+const getAll = async (request) => {
+  const validData = validation(request, schema.getAll);
+
+  const contactUs = await repository.getAll(validData);
+
+  if (contactUs.length === 0) {
     throw new responseError(404, "contact us not found");
   }
 
-  return result;
+  const totalItems = await repository.totalItems();
+  const currentPage = validData.page;
+  const perPage = validData.size;
+  const totalPage = Math.ceil(totalItems / validData.size);
+
+  return {
+    contactUs,
+    currentPage,
+    perPage,
+    totalItems,
+    totalPage,
+  };
 };
 
 // get by id

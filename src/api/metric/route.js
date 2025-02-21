@@ -1,9 +1,10 @@
 const express = require("express");
 const router = express.Router();
 const prisma = require("../../utilities/database");
-const authentication = require("../../middleware/authentication");
+// const authentication = require("../../middleware/authentication");
+const responseError = require("../../error/responseError");
 
-router.get("/", authentication, async (req, res, next) => {
+router.get("/", async (req, res, next) => {
   try {
     const now = new Date();
 
@@ -74,6 +75,24 @@ router.get("/", authentication, async (req, res, next) => {
       totalRequestsToday,
       dailyMetrics30Days,
     });
+  } catch (error) {
+    next(error);
+  }
+});
+
+// API to log visits from the frontend
+router.post("/visit", async (req, res, next) => {
+  try {
+    const ip = req.body.ip;
+    // console.log(req.body);
+    console.log(req.body.ip);
+    if (!ip) {
+      throw new responseError(404, "ip not found");
+    }
+
+    await prisma.visit.create({ data: { ip } });
+
+    res.status(201).json({ message: "Visit logged successfully" });
   } catch (error) {
     next(error);
   }

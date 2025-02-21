@@ -21,14 +21,27 @@ const register = async (request) => {
 };
 
 // get all user
-const getAllUser = async () => {
-  const result = await repository.getAllUser();
+const getAllUser = async (request) => {
+  const validData = validation(request, schema.getAll);
 
-  if (result.length === 0) {
+  const user = await repository.getAllUser(validData);
+
+  if (user.length === 0) {
     throw new responseError(404, "user not found");
   }
 
-  return result;
+  const totalItems = await repository.totalItems();
+  const currentPage = validData.page;
+  const perPage = validData.size;
+  const totalPage = Math.ceil(totalItems / validData.size);
+
+  return {
+    user,
+    currentPage,
+    perPage,
+    totalItems,
+    totalPage,
+  };
 };
 
 // get user by id

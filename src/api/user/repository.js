@@ -25,12 +25,19 @@ const createUser = async (data) => {
 };
 
 // get all user
-const getAllUser = async () =>
+const getAllUser = async (data) =>
   await prisma.user.findMany({
     select: selectData,
     where: { role: "ADMIN" },
+    skip: (data.page - 1) * data.size || 0,
+    take: data.size || 10,
   });
 
+const totalItems = async () => {
+  const result = await prisma.user.count();
+
+  return result;
+};
 // get user by id
 const getUserById = async (id) => {
   const result = await prisma.user.findUnique({
@@ -77,4 +84,5 @@ module.exports = {
   updateUserById,
   updatePasswordById,
   remove,
+  totalItems,
 };
