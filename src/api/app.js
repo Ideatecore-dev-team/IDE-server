@@ -39,6 +39,8 @@ const allowedOrigins = [
   "https://ideindonesia.ideatecore.com",
   "https://cms-ideindonesia.ideatecore.com",
   "https://devideindonesia.netlify.app",
+  "https://theideindonesia.id",
+  "https://cms.theideindonesia.id",
 ];
 
 // General CORS middleware
