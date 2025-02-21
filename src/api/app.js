@@ -36,9 +36,9 @@ app.use(cookieParser());
 const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
-  "https://ideindonesia.ideatecore.com",
-  "https://cms-ideindonesia.ideatecore.com",
   "https://devideindonesia.netlify.app",
+  "https://theideindonesia.id",
+  "https://cms.theideindonesia.id",
 ];
 
 // General CORS middleware
