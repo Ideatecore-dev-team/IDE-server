@@ -12,12 +12,19 @@ const create = async (request) => {
 
 // get all
 const getAll = async (request) => {
-  const result = await repository.getAll();
-  if (result.length === 0) {
+  const validData = validation(request, schema.getAll);
+
+  const subscribe = await repository.getAll(validData);
+  if (subscribe.length === 0) {
     throw new responseError(404, "subscribe not found");
   }
 
-  return result;
+  const totalItems = await repository.totalItems();
+  const currentPage = validData.page;
+  const perPage = validData.size;
+  const totalPage = Math.ceil(totalItems / validData.size);
+
+  return { subscribe, currentPage, perPage, totalItems, totalPage };
 };
 
 // get by id
