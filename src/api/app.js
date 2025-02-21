@@ -37,6 +37,7 @@ const allowedOrigins = [
   "http://localhost:5173",
   "http://localhost:5174",
   "https://devideindonesia.netlify.app",
+  "https://cmsdevide.netlify.app",
   "https://theideindonesia.id",
   "https://cms.theideindonesia.id",
 ];
